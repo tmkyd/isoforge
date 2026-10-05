@@ -1,0 +1,13 @@
+# Visual Studio / CMake
+.vs/
+out/
+CMakeUserPresets.json
+
+# Editor settings
+.vscode/
+
+# Backup images, hash files, logs and temporary files produced by isoforge
+*.iso
+*.partial
+*.iso.sha256
+*.log

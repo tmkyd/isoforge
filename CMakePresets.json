@@ -1,0 +1,121 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 25,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "windows-base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      }
+    },
+    {
+      "name": "windows-x64-base",
+      "hidden": true,
+      "inherits": "windows-base",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "ISOFORGE_ARCH": "x64"
+      }
+    },
+    {
+      "name": "windows-x86-base",
+      "hidden": true,
+      "inherits": "windows-base",
+      "architecture": {
+        "value": "x86",
+        "strategy": "external"
+      },
+      "cacheVariables": {
+        "ISOFORGE_ARCH": "x86"
+      }
+    },
+    {
+      "name": "x64-debug",
+      "displayName": "x64 Debug",
+      "inherits": "windows-x64-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x64-release",
+      "displayName": "x64 Release",
+      "inherits": "windows-x64-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    },
+    {
+      "name": "x86-debug",
+      "displayName": "x86 Debug",
+      "inherits": "windows-x86-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "x86-release",
+      "displayName": "x86 Release",
+      "inherits": "windows-x86-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-debug",
+      "configurePreset": "x64-debug"
+    },
+    {
+      "name": "x64-release",
+      "configurePreset": "x64-release"
+    },
+    {
+      "name": "x86-debug",
+      "configurePreset": "x86-debug"
+    },
+    {
+      "name": "x86-release",
+      "configurePreset": "x86-release"
+    }
+  ],
+  "packagePresets": [
+    {
+      "name": "x64-release",
+      "configurePreset": "x64-release",
+      "generators": [
+        "ZIP"
+      ],
+      "packageDirectory": "${sourceDir}/out/package"
+    },
+    {
+      "name": "x86-release",
+      "configurePreset": "x86-release",
+      "generators": [
+        "ZIP"
+      ],
+      "packageDirectory": "${sourceDir}/out/package"
+    }
+  ]
+}
